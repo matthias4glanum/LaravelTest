@@ -54,34 +54,63 @@
                         </svg>
                     </a>
                 </td>
-                <form action="{{ route('user.delete', ['id' => $user->id])}}" method="user">
-                    @method('DELETE')
-                    @csrf
-                    <td>
-                        <button
-                            type="submit"
-                            class="btn btn-outline-danger w-75"
-                            onclick="return confirm('Are you sure?')"
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16" class="bi bi-trash-fill mt-1">
-                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
-                            </svg>
-                        </button>
-                    </td>
-                </form>
+
+                <td>
+                    <button
+                        type="button"
+                        class="btn btn-outline-danger w-75"
+                        data-bs-toggle="modal" data-bs-target="#deleteModal"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16" class="bi bi-trash-fill mt-1">
+                            <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                        </svg>
+                    </button>
+                </td>
+
+                <!-- Modal Delete -->
+                <div class="modal fade"
+                    id="deleteModal"
+                    data-bs-backdrop="static"
+                    data-bs-keyboard="false"
+                    tabindex="-1"
+                    aria-labelledby="staticBackdropLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header text-bg-danger">
+                                <h5 class="modal-title text-center bg-red-600 mx-auto" id="staticBackdropLabel">Supprimer {{ $user->firstname }} {{ $user->lastname }}</h5>
+                                {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
+                            </div>
+                            <div class="modal-body">
+                                <p class="mt-3">Êtes-vous sûr de vouloir supprimer cet utilisateur ?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                <form action="{{ route('user.delete', ['id' => $user->id])}}" method="user">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fin Modal Delete -->
+
             </tr>
         @endforeach
 
         </tbody>
-
     </table>
-    
+
     <script>
         $(function(){
             $('#member').DataTable({
+                dom: '<"toolbar">frtip',
                 language: {
                     url: '//cdn.datatables.net/plug-ins/1.13.4/i18n/fr-FR.json',
                 },
+                rowReorder: true,
                 initComplete: function(settings) {
                 //settings.nTable.id --> Get table ID
                 $('#'+settings.nTable.id+'_filter input').wrap(`
@@ -101,6 +130,15 @@
                 }
             });
         });
+    </script>
+
+    <script>
+        var myModal = document.getElementById('member')
+        var myInput = document.getElementById('myInput')
+
+        myModal.addEventListener('shown.bs.modal', function () {
+        myInput.focus()
+        })
     </script>
 
 @endsection

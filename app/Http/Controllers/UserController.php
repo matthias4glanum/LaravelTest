@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CreateUserRequest;
 use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\UpdateUserRequest;
 
 class UserController extends Controller
 {
@@ -58,13 +59,13 @@ class UserController extends Controller
         ]);
     }
 
-    public function update(User $user, CreateUserRequest $request)
+    public function update(User $user, UpdateUserRequest $request)
     {
         $user->update([
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
             'email' => $request->email,
-            'type' => $request->type,
+            // 'type' => $request->type,
             'updated_at' => now()
         ]);
 

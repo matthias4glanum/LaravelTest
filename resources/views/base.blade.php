@@ -18,7 +18,8 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 
     <title>@yield('title')</title>
 </head>
@@ -37,30 +38,36 @@
                         <a class="nav-link" href="{{ route('login') }}">Login</a>
                     </li>
                 @else
-                    {{-- <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('blog.index') }}">Blog <span class="sr-only">(current)</span></a>
-                    </li> --}}
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('user.index') }}">Utilisateurs <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">Ajouter</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-danger mx-5" href="{{ route('logout') }}">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right text-danger" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
-                                <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
-                            </svg>
-                            Se déconnecter
-                        </a>
-                    </li>
+                    <div class="d-flex">
+                        <div class="d-flex">
+                            {{-- <li class="nav-item active">
+                                <a class="nav-link" href="{{ route('blog.index') }}">Blog <span class="sr-only">(current)</span></a>
+                            </li> --}}
+                            <li class="nav-item {{ Route::getCurrentRoute()->uri === 'user' ? 'active' : '' }}">
+                                <a class="nav-link" href="{{ route('user.index') }}">Utilisateurs <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item {{ Route::getCurrentRoute()->uri === 'register' ? 'active' : '' }}">
+                                <a class="nav-link" href="{{ route('register') }}">Ajouter</a>
+                            </li>
+                            <li class="nav-item {{ Route::getCurrentRoute()->uri === 'mail' ? 'active' : '' }}">
+                                <a class="nav-link" href="#">Mail</a>
+                            </li>
+                        </div>
+                        <div>
+                            <li class="nav-item">
+                                <a class="nav-link text-danger mx-5" href="{{ route('logout') }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right text-danger" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+                                        <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                                    </svg>
+                                    Se déconnecter
+                                </a>
+                            </li>
+                        </div>
+                    </div>
+
                 @endguest
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
-            </form>
         </div>
     </nav>
 

@@ -46,6 +46,31 @@
                                 </div>
                             </div>
 
+                            {{-- <div class="d-flex justify-content-center mb-4">
+
+                                <div class="form-check form-switch mr-5">
+                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" name="type"
+                                            @if ($user->type === \App\Enums\UserType::Admin->value)
+                                                checked
+                                            @else
+                                                value=""
+                                            @endif
+                                        >
+                                        <label class="form-check-label" for="flexSwitchCheckChecked">Admin</label>
+                                </div>
+
+                                <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked2" name="type"
+                                            @if ($user->type === \App\Enums\UserType::Member->value)
+                                                checked
+                                            @else
+                                                value=""
+                                            @endif
+                                        >
+                                        <label class="form-check-label" for="flexSwitchCheckChecked2">Adhérent</label>
+                                </div>
+                            </div> --}}
+
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     Modifier

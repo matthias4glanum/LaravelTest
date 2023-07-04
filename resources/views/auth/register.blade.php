@@ -9,7 +9,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Enregistrer</div>
+                <div class="card-header bg-secondary text-center text-white display-6">Ajouter un nouvel utilisateur</div>
                 <div class="card-body">
                     <form action="{{ route('register.post') }}" method="POST">
                         @method('POST')
