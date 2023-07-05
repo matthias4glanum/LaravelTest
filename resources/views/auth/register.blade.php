@@ -42,6 +42,15 @@
                                     @endif
                                 </div>
                             </div>
+
+                            <div class="form-group row justify-content-center">
+                                <div class="col-md-6">
+                                    <input type="text" id="email_address" class="form-control" name="password" placeholder="password" required autofocus>
+                                    @if ($errors->has('password'))
+                                        <span class="text-danger">{{ $errors->first('password') }}</span>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
 
                         <div class="d-flex justify-content-center mb-4">

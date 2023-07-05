@@ -65,7 +65,7 @@ class UserController extends Controller
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
             'email' => $request->email,
-            // 'type' => $request->type,
+            'type' => $request->type,
             'updated_at' => now()
         ]);
 
@@ -74,11 +74,15 @@ class UserController extends Controller
 
     public function destroy(Request $request)
     {
-        // $users = $request->id;
-        // $users->delete();
-
-        User::where('id', $request->id)->delete();
+        User::find($request->id)->delete();
 
         return Redirect::route('user.index')->with('success', "L'utilisateur a bien été supprimé");
+    }
+
+    public function countType()
+    {
+        User::all()->groupBy('type')->map(function ($type) {
+        return $type->count();
+        });
     }
 }

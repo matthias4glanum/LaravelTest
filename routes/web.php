@@ -56,7 +56,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/new', 'store');
         Route::get('/edit/{user}', 'edit')->name('edit');
         Route::post('/edit/{user}', 'update');
-        Route::get('/delete/{id}', 'destroy')->name('delete');
+        Route::delete('/delete/{id}', 'destroy')->name('delete');
 
     });
 });
