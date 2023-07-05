@@ -46,21 +46,20 @@ class UserController extends Controller
                 );
         }
         return redirect()->route('user.index', ['user' => $user->id])->with('success', "Un nouvel utilisateur a bien été ajouté");
-
-        // return redirect()
-        //         ->route('blog.index', ['user' => $user->id])
-        //         ->with('verified', __('Un nouvel utilisateur a bien été ajouté'));
     }
 
-    public function edit(User $user)
+    public function update(Request $request)
     {
-        return view('user.edit', [
-            'user' => $user
-        ]);
-    }
+        $user = User::find($request->id);
 
-    public function update(User $user, UpdateUserRequest $request)
-    {
+        $this->validate($request,([
+            'firstname' => 'required|string',
+            'lastname' => 'required|string',
+            'email' => 'required|email|string',
+            'type' => 'required|string'
+        ]));
+
+
         $user->update([
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,

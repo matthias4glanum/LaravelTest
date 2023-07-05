@@ -63,19 +63,13 @@
                 <td class="lh-lg">{{ $user->lastname }}</td>
                 <td class="lh-lg">{{ $user->email }}</td>
                 <td class="lh-lg">{{ $user->type }}</td>
-                {{-- <td>
-                    <a href="{{ route('user.edit', ['user' => $user->id]) }}" class="btn btn-outline-secondary w-75">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
-                            <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
-                        </svg>
-                    </a>
-                </td> --}}
 
                 <td>
                     <button
                         type="button"
                         class="btn btn-outline-secondary w-75"
-                        data-bs-toggle="modal" data-bs-target="#editModale"
+                        data-bs-toggle="modal" data-bs-target="#editModale_{{$user->id}}"
+                        data-action="{{ route('user.edit', ['id' => $user->id])}}"
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
                             <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
@@ -180,6 +174,90 @@
                 </div>
                 <!-- Fin Modal Add User -->
 
+                <!-- Modal Edit -->
+                <div class="modal fade"
+                id="editModale_{{$user->id}}"
+                data-bs-backdrop="static"
+                data-bs-keyboard="false"
+                tabindex="-1"
+                aria-labelledby="staticBackdropLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header text-bg-secondary">
+                            <h5 class="modal-title text-center bg-red-600 mx-auto" id="staticBackdropLabel">Modifier {{ $user->firstname }} {{ $user->lastname }}</h5>
+                            {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
+                        </div>
+                        <form action="{{ route('user.edit', ['id' => $user->id]) }}" method="POST">
+                            @method('POST')
+                            @csrf
+                            <input type="hidden" value="{{$user->id}}" name="id">
+                            <div class="form-group row mt-4">
+                                <label for="firstname" class="col-md-4 col-form-label text-md-right">Nom</label>
+                                <div class="col-md-6">
+                                    <input type="text" id="firstname" class="form-control" name="firstname" value="{{ $user->firstname }}" required autofocus>
+                                    @if ($errors->has('firstname'))
+                                        <span class="text-danger">{{ $errors->first('firstname') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="lastname" class="col-md-4 col-form-label text-md-right">Prénom</label>
+                                <div class="col-md-6">
+                                    <input type="text" id="lastname" class="form-control" name="lastname" value="{{ $user->lastname }}" required autofocus>
+                                    @if ($errors->has('lastname'))
+                                        <span class="text-danger">{{ $errors->first('lastname') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="email_address" class="col-md-4 col-form-label text-md-right">Email</label>
+                                <div class="col-md-6">
+                                    <input type="text" id="email_address" class="form-control" name="email" value="{{ $user->email }}" required autofocus>
+                                    @if ($errors->has('email'))
+                                        <span class="text-danger">{{ $errors->first('email') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-center mb-4">
+
+                                <div class="form-check form-switch mr-5">
+                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" name="type" value="{{ \App\Enums\UserType::Admin->value }}"
+                                            @if ($user->type === \App\Enums\UserType::Admin->value)
+                                                checked
+                                            @endif
+                                        >
+                                        <label class="form-check-label" for="flexSwitchCheckChecked">Admin</label>
+                                </div>
+
+                                <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked2" name="type" value="{{ \App\Enums\UserType::Member->value }}"
+                                            @if ($user->type === \App\Enums\UserType::Member->value)
+                                                checked
+                                            @endif
+                                        >
+                                        <label class="form-check-label" for="flexSwitchCheckChecked2">Adhérent</label>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer mx-auto mb-4 mt-4">
+                                <button type="button" class="btn btn-secondary mr-5" data-bs-dismiss="modal">Annuler</button>
+                                <button type="submit" class="btn btn-primary mx-auto">
+                                    Modifier
+                                </button>
+                            </div>
+                            <div class="">
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- Fin Modal Edit -->
+
                 <!-- Modal Delete -->
                 <div class="modal fade"
                     id="deleteModal_{{$user->id}}"
@@ -210,94 +288,6 @@
                     </div>
                 </div>
                 <!-- Fin Modal Delete -->
-
-
-                <!-- Modal Edit -->
-                <div class="modal fade"
-                    id="editModale"
-                    data-bs-backdrop="static"
-                    data-bs-keyboard="false"
-                    tabindex="-1"
-                    aria-labelledby="staticBackdropLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header text-bg-secondary">
-                                <h5 class="modal-title text-center bg-red-600 mx-auto" id="staticBackdropLabel">Modifier {{ $user->firstname }} {{ $user->lastname }}</h5>
-                                {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
-                            </div>
-                            <form action="{{ route('user.edit', ['user' => $user]) }}" method="POST">
-                                @method('POST')
-                                @csrf
-                                <div class="form-group row mt-4">
-                                    <label for="firstname" class="col-md-4 col-form-label text-md-right">Nom</label>
-                                    <div class="col-md-6">
-                                        <input type="text" id="firstname" class="form-control" name="firstname" value="{{ $user->firstname }}" required autofocus>
-                                        @if ($errors->has('firstname'))
-                                            <span class="text-danger">{{ $errors->first('firstname') }}</span>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="lastname" class="col-md-4 col-form-label text-md-right">Prénom</label>
-                                    <div class="col-md-6">
-                                        <input type="text" id="lastname" class="form-control" name="lastname" value="{{ $user->lastname }}" required autofocus>
-                                        @if ($errors->has('lastname'))
-                                            <span class="text-danger">{{ $errors->first('lastname') }}</span>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="email_address" class="col-md-4 col-form-label text-md-right">Email</label>
-                                    <div class="col-md-6">
-                                        <input type="text" id="email_address" class="form-control" name="email" value="{{ $user->email }}" required autofocus>
-                                        @if ($errors->has('email'))
-                                            <span class="text-danger">{{ $errors->first('email') }}</span>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="d-flex justify-content-center mb-4">
-
-                                    <div class="form-check form-switch mr-5">
-                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" name="type"
-                                                @if ($user->type === \App\Enums\UserType::Admin->value)
-                                                    checked
-                                                @else
-                                                    value=""
-                                                @endif
-                                            >
-                                            <label class="form-check-label" for="flexSwitchCheckChecked">Admin</label>
-                                    </div>
-
-                                    <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked2" name="type"
-                                                @if ($user->type === \App\Enums\UserType::Member->value)
-                                                    checked
-                                                @else
-                                                    value=""
-                                                @endif
-                                            >
-                                            <label class="form-check-label" for="flexSwitchCheckChecked2">Adhérent</label>
-                                    </div>
-                                </div>
-
-                                <div class="modal-footer mx-auto mb-4 mt-4">
-                                    <button type="button" class="btn btn-secondary mr-5" data-bs-dismiss="modal">Annuler</button>
-                                    <button type="submit" class="btn btn-primary mx-auto">
-                                        Modifier
-                                    </button>
-                                </div>
-                                <div class="">
-
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <!-- Fin Modal Edit -->
 
             </tr>
         @endforeach

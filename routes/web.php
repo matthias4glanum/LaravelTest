@@ -50,14 +50,17 @@ Route::prefix('/blog')->name('blog.')->controller(BlogController::class)->group(
 Route::middleware(['auth'])->group(function () {
     Route::get('register', [AuthController::class, 'register'])->name('register');
     Route::post('post-register', [AuthController::class, 'postRegistration'])->name('register.post');
+
     Route::prefix('/user')->name('user.')->controller(UserController::class)->group(function() {
+
         Route::get('/', 'index')->name('index');
+
         Route::get('/new', 'create')->name('create');
         Route::post('/new', 'store');
-        Route::get('/edit/{user}', 'edit')->name('edit');
-        Route::post('/edit/{user}', 'update');
-        Route::delete('/delete/{id}', 'destroy')->name('delete');
 
+        Route::post('/edit/{id}', 'update')->name('edit');
+
+        Route::delete('/delete/{id}', 'destroy')->name('delete');
     });
 });
 
