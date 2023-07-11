@@ -16,21 +16,21 @@
 
     <div>
         <p class="mt-5 mb-5 text-left font-weight-bold text-secondary">
-            Adhérents : <span>{{ $type['Admin'] }}</span><br>
-            Admins : <span>{{ $type['Adhérent'] }}</span></p>
+            Adhérent(s) : <span>{{ $type['Admin'] }}</span><br>
+            Admin(s) : <span>{{ $type['Adhérent'] }}</span></p>
     </div>
 
-    <button
-        type="button"
-        class="btn btn-primary p-1 mb-5"
-        title="Ajouter un nouvel utilisateur"
-        data-bs-toggle="modal" data-bs-target="#addUserModale"
-    >
-        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-person-add" viewBox="0 0 16 16">
-            <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0Zm-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/>
-            <path d="M8.256 14a4.474 4.474 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10c.26 0 .507.009.74.025.226-.341.496-.65.804-.918C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4s1 1 1 1h5.256Z"/>
-        </svg>
-    </button>
+        <button
+            type="button"
+            class="btn btn-primary p-1 mb-5"
+            title="Ajouter un nouvel utilisateur"
+            data-bs-toggle="modal" data-bs-target="#addUserModale"
+        >
+            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-person-add" viewBox="0 0 16 16">
+                <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0Zm-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/>
+                <path d="M8.256 14a4.474 4.474 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10c.26 0 .507.009.74.025.226-.341.496-.65.804-.918C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4s1 1 1 1h5.256Z"/>
+            </svg>
+        </button>
 
     {{-- <button type="button" class="btn btn-primary p-1 mb-5" title="Ajouter un nouvel utilisateur">
         <a class="nav-link text-white" href="{{ route('register') }}">
@@ -151,12 +151,12 @@
                                     <div class="d-flex justify-content-center mb-4">
 
                                         <div class="form-check form-switch mr-5">
-                                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" name="type" value="{{ \App\Enums\UserType::Admin->value }}">
+                                                <input class="form-check-input" type="radio" id="flexSwitchCheckChecked" name="type" value="{{ \App\Enums\UserType::Admin->value }}">
                                                 <label class="form-check-label" for="flexSwitchCheckChecked">Admin</label>
                                         </div>
 
                                         <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked2" name="type" value="{{ \App\Enums\UserType::Member->value }}">
+                                                <input class="form-check-input" type="radio" id="flexSwitchCheckChecked2" name="type" value="{{ \App\Enums\UserType::Member->value }}">
                                                 <label class="form-check-label" for="flexSwitchCheckChecked2">Adhérent</label>
                                         </div>
                                     </div>
@@ -225,21 +225,21 @@
                             <div class="d-flex justify-content-center mb-4">
 
                                 <div class="form-check form-switch mr-5">
-                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" name="type" value="{{ \App\Enums\UserType::Admin->value }}"
-                                            @if ($user->type === \App\Enums\UserType::Admin->value)
-                                                checked
-                                            @endif
-                                        >
-                                        <label class="form-check-label" for="flexSwitchCheckChecked">Admin</label>
+                                    <input class="form-check-input" type="radio" id="flexSwitchCheckChecked" name="type" value="{{ \App\Enums\UserType::Admin->value }}"
+                                        @if ($user->type === \App\Enums\UserType::Admin->value)
+                                            checked
+                                        @endif
+                                    >
+                                    <label class="form-check-label" for="flexSwitchCheckChecked">Admin</label>
                                 </div>
 
                                 <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked2" name="type" value="{{ \App\Enums\UserType::Member->value }}"
-                                            @if ($user->type === \App\Enums\UserType::Member->value)
-                                                checked
-                                            @endif
-                                        >
-                                        <label class="form-check-label" for="flexSwitchCheckChecked2">Adhérent</label>
+                                    <input class="form-check-input" type="radio" id="flexSwitchCheckChecked2" name="type" value="{{ \App\Enums\UserType::Member->value }}"
+                                        @if ($user->type === \App\Enums\UserType::Member->value)
+                                            checked
+                                        @endif
+                                    >
+                                    <label class="form-check-label" for="flexSwitchCheckChecked2">Adhérent</label>
                                 </div>
                             </div>
 
@@ -305,21 +305,21 @@
                 },
                 rowReorder: true,
                 initComplete: function(settings) {
-                //settings.nTable.id --> Get table ID
-                $('#'+settings.nTable.id+'_filter input').wrap(`
-                    <div class="d-inline-flex position-relative"></div>
-                `).after(`
-                    <button type="button" class="close position-absolute" aria-label="Close" style="right:5px">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                `).attr('required','required').attr('title','Search');
+                    //settings.nTable.id --> Get table ID
+                    $('#'+settings.nTable.id+'_filter input').wrap(`
+                        <div class="d-inline-flex position-relative"></div>
+                    `).after(`
+                        <button type="button" class="close position-absolute" aria-label="Close" style="right:5px">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    `).attr('required','required').attr('title','Search');
 
-                // Click Event on Clear button
-                $(document).on('click', '#'+settings.nTable.id+'_filter button', function(){
-                    $('#'+settings.nTable.id).DataTable({
-                    "retrieve": true,
-                    }).search('').draw(); // reDraw table
-                });
+                    // Click Event on Clear button
+                    $(document).on('click', '#'+settings.nTable.id+'_filter button', function(){
+                        $('#'+settings.nTable.id).DataTable({
+                        "retrieve": true,
+                        }).search('').draw(); // reDraw table
+                    });
                 }
             });
         });
