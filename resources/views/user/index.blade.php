@@ -16,8 +16,9 @@
 
     <div>
         <p class="mt-5 mb-5 text-left font-weight-bold text-secondary">
-            Adhérent(s) : <span>{{ $type['Admin'] }}</span><br>
-            Admin(s) : <span>{{ $type['Adhérent'] }}</span></p>
+            Admin(s) : <span>{{ $type['Admin'] }}</span><br>
+            Adhérent(s) : <span>{{ $type['Adhérent'] }}</span>
+        </p>
     </div>
 
         <button
