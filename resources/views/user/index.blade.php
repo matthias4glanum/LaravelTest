@@ -11,7 +11,7 @@
     @endphp
 
     <div>
-        <h1 class="mt-5 text-left text-secondary mb-5"><span>{{ $users->count() }}</span> Utilisateurs</h1>
+        <h1 class="bg-primary rounded w-25 mt-5 text-left text-white text-center mx-auto mb-5"><span>{{ $users->count() }}</span> Membres</h1>
     </div>
 
     <div>
@@ -50,6 +50,7 @@
                 <th scope="col" class="text-primary">Prénom</th>
                 <th scope="col" class="text-primary">Email</th>
                 <th scope="col" class="text-primary">Type</th>
+                <th scope="col" class="text-primary">Date</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
                 <th scope="col"></th>
@@ -64,6 +65,7 @@
                 <td class="lh-lg">{{ $user->lastname }}</td>
                 <td class="lh-lg">{{ $user->email }}</td>
                 <td class="lh-lg">{{ $user->type }}</td>
+                <td class="lh-lg fw-bold text-primary">{{ $user->created_at->format('d-m-Y à H:i:s') }}</td>
 
                 <td>
                     <button
