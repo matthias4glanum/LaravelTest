@@ -56,7 +56,7 @@
                                 <a class="nav-link" href="{{ route('register') }}">Ajouter</a>
                             </li>
                             <li class="nav-item {{ Route::getCurrentRoute()->uri === 'mail' ? 'active' : '' }}">
-                                <a class="nav-link" href="#">Mail</a>
+                                <a class="nav-link" href="https://mail.google.com/">Mail</a>
                             </li>
                         </div>
                         <div>
