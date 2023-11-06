@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\MemberController;
 use App\Http\Controllers\Auth\AuthController;
 
 /*
@@ -49,9 +50,22 @@ Route::prefix('/blog')->name('blog.')->controller(BlogController::class)->group(
 
 Route::middleware(['auth'])->group(function () {
     Route::get('register', [AuthController::class, 'register'])->name('register');
-    Route::post('post-register', [AuthController::class, 'postRegistration'])->name('register.post');
+    Route::post('user-register', [AuthController::class, 'userRegistration'])->name('register.user');
+    Route::post('member-register', [AuthController::class, 'memberRegistration'])->name('register.member');
 
     Route::prefix('/user')->name('user.')->controller(UserController::class)->group(function() {
+
+        Route::get('/', 'index')->name('index');
+
+        Route::get('/new', 'create')->name('create');
+        Route::post('/new', 'store');
+
+        Route::post('/edit/{id}', 'update')->name('edit');
+
+        Route::delete('/delete/{id}', 'destroy')->name('delete');
+    });
+
+    Route::prefix('/member')->name('member.')->controller(MemberController::class)->group(function() {
 
         Route::get('/', 'index')->name('index');
 

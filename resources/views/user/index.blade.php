@@ -21,9 +21,15 @@
         </p>
     </div>
 
+    <div class="container d-flex">
+
+        <a href="https://www.facebook.com/gymtonic.caumont" target="_blank" rel="noopener noreferrer" title="Gym Tonic Facebook">
+            <x-uiw-facebook width="45" height="45" class="rounded-2"/>
+        </a>
+
         <button
             type="button"
-            class="btn btn-primary p-1 mb-5"
+            class="btn btn-primary p-1 mb-5 ml-3"
             title="Ajouter un nouvel utilisateur"
             data-bs-toggle="modal" data-bs-target="#addUserModale"
         >
@@ -32,6 +38,8 @@
                 <path d="M8.256 14a4.474 4.474 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10c.26 0 .507.009.74.025.226-.341.496-.65.804-.918C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4s1 1 1 1h5.256Z"/>
             </svg>
         </button>
+
+    </div>
 
     {{-- <button type="button" class="btn btn-primary p-1 mb-5" title="Ajouter un nouvel utilisateur">
         <a class="nav-link text-white" href="{{ route('register') }}">
@@ -80,7 +88,6 @@
                     </button>
                 </td>
 
-
                 <td>
                     <a href="https://mail.google.com/" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary w-75">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-at" viewBox="0 0 16 16">
@@ -118,7 +125,7 @@
                                 {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
                             </div>
                             <div class="modal-body">
-                                <form action="{{ route('register.post') }}" method="POST">
+                                <form action="{{ route('register.user') }}" method="POST">
                                     @method('POST')
                                     @csrf
                                     <div class="d-flex flex-column mb-4 mt-4">
@@ -221,6 +228,16 @@
                                     <input type="text" id="email_address" class="form-control" name="email" value="{{ $user->email }}" required autofocus>
                                     @if ($errors->has('email'))
                                         <span class="text-danger">{{ $errors->first('email') }}</span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="password" class="col-md-4 col-form-label text-md-right">Mot de passe</label>
+                                <div class="col-md-6">
+                                    <input type="text" id="password" class="form-control" name="password" value="{{ $user->password }}" required autofocus>
+                                    @if ($errors->has('password'))
+                                        <span class="text-danger">{{ $errors->first('password') }}</span>
                                     @endif
                                 </div>
                             </div>

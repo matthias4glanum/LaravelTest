@@ -50,7 +50,7 @@
                                 <a class="nav-link" href="{{ route('blog.index') }}">Blog <span class="sr-only">(current)</span></a>
                             </li> --}}
                             <li class="nav-item {{ Route::getCurrentRoute()->uri === 'user' ? 'active' : '' }}">
-                                <a class="nav-link" href="{{ route('user.index') }}">Utilisateurs <span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="{{ route('member.index') }}">Membres <span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item {{ Route::getCurrentRoute()->uri === 'register' ? 'active' : '' }}">
                                 <a class="nav-link" href="{{ route('register') }}">Ajouter</a>

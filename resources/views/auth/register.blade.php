@@ -11,7 +11,7 @@
             <div class="card">
                 <div class="card-header bg-secondary text-center text-white display-6">Ajouter un nouvel utilisateur</div>
                 <div class="card-body">
-                    <form action="{{ route('register.post') }}" method="POST">
+                    <form action="{{ route('register.user') }}" method="POST">
                         @method('POST')
                         @csrf
                         <div class="d-flex flex-column mb-4 mt-4">
